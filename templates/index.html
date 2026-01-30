@@ -114,6 +114,20 @@
                 <option value="active">Very Active</option>
               </select>
             </div>
+
+            <div class="form-group">
+              <label for="mood_rating">Mood Rating (1-10):</label>
+              <input
+                type="number"
+                id="mood_rating"
+                name="mood_rating"
+                placeholder="7"
+                min="1"
+                max="10"
+                value="{{ user_data.mood_rating or '' }}"
+                required
+              />
+            </div>
           </div>
 
           <button type="submit" class="submit-btn">
@@ -151,6 +165,13 @@
             <h3>Nutrition</h3>
             <p class="metric-value">{{ user_data.calorie_intake }} cal</p>
             <p class="feedback-message">{{ user_data.calorie_feedback }}</p>
+          </div>
+          {% endif %} {% if user_data.mood_rating %}
+          <div class="feedback-card mood-card">
+            <div class="card-icon">😊</div>
+            <h3>Mood</h3>
+            <p class="metric-value">{{ user_data.mood_rating }}/10</p>
+            <p class="feedback-message">{{ user_data.mood_feedback }}</p>
           </div>
           {% endif %}
         </div>

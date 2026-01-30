@@ -565,6 +565,14 @@ footer {
     border-color: #10b981;
 }
 
+.mood-card {
+    border-top: 4px solid #f59e0b;
+}
+
+.mood-card:hover {
+    border-color: #f59e0b;
+}
+
 .card-icon {
     font-size: 3.5em;
     margin-bottom: 15px;

@@ -33,6 +33,7 @@ def submit():
     calorie_intake = request.form.get('calorie_intake', '')
     age = request.form.get('age', '')
     activity_level = request.form.get('activity_level', '')
+    mood_rating = request.form.get('mood_rating', '')
     
     # Store it
     user_data['name'] = name
@@ -41,6 +42,7 @@ def submit():
     user_data['calorie_intake'] = calorie_intake
     user_data['age'] = age
     user_data['activity_level'] = activity_level
+    user_data['mood_rating'] = mood_rating
     
     # Generate specific sleep feedback
     try:
@@ -129,6 +131,22 @@ def submit():
             user_data['calorie_feedback'] = f"⚠️ High intake! Recommended: {cal_min}-{cal_max} for {activity_desc}. Monitor portions or increase activity."
     except ValueError:
         user_data['calorie_feedback'] = "Please enter valid calorie amount."
+    
+    # Generate mood feedback
+    try:
+        mood = int(mood_rating)
+        if mood <= 3:
+            user_data['mood_feedback'] = "😟 Low mood detected. Consider talking to someone or doing something you enjoy."
+        elif mood <= 5:
+            user_data['mood_feedback'] = "😔 Feeling down? Try some exercise or connect with friends."
+        elif mood <= 7:
+            user_data['mood_feedback'] = "🙂 Decent mood! Keep up the healthy habits."
+        elif mood <= 9:
+            user_data['mood_feedback'] = "😄 Great mood! You're doing well today!"
+        else:
+            user_data['mood_feedback'] = "🎉 Excellent! You're feeling fantastic!"
+    except ValueError:
+        user_data['mood_feedback'] = "Please enter a valid mood rating (1-10)."
     
     print("DEBUG - Data stored:", user_data)
     return redirect(url_for('index'))
